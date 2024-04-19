@@ -29,7 +29,11 @@ module Dependabot
           \A                                          # beginning of string
           @types\/                                    # starts with @types/
           ((?<scope>.+)__)?                           # capture scope
-          (?<name>.+)                                 # capture name
+          #(?<name>.+)                                 # capture name
+          (?<name>                                    # capture package name
+            (?=[^\.\_])                               # reject leading dot or underscore
+            [a-z0-9\-\_\.\!\~\*\'\(\)]+               # URL-safe characters
+          )
           \z                                          # end of string
       }xi                                             # multi-line/case-insensitive
 
